@@ -82,13 +82,13 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             {isMusicPlaying ? (
               <>
-                <Music className="w-3.5 h-3.5 animate-spin" style={{ animationDuration: '6s' }} />
-                <span>Musik Aktif</span>
+                <Music className="w-3.5 h-3.5 animate-spin text-[#D96B60]" style={{ animationDuration: '6s' }} />
+                <span>A Thousand Years ♪</span>
               </>
             ) : (
               <>
                 <VolumeX className="w-3.5 h-3.5" />
-                <span>Nyalakan Lagu</span>
+                <span>Putar Musik</span>
               </>
             )}
           </button>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { LetterSection } from './components/LetterSection';
@@ -12,8 +12,14 @@ import { romanticPlayer } from './utils/audio';
 export default function App() {
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
 
+  useEffect(() => {
+    return romanticPlayer.subscribe((playing) => {
+      setIsMusicPlaying(playing);
+    });
+  }, []);
+
   const handleStartExplore = () => {
-    // Optionally start music if not started
+    // Start music on first explore click
     if (!isMusicPlaying) {
       romanticPlayer.start();
       setIsMusicPlaying(true);
