@@ -1,10 +1,15 @@
+import denimImg from '../assets/images/memory_denim_kembaran.jpg';
+import topangDaguImg from '../assets/images/memory_topang_dagu.jpg';
+import cubitPipiImg from '../assets/images/memory_cubit_pipi.jpg';
+import tatapanMataImg from '../assets/images/memory_tatapan_mata.jpg';
+
 export interface PhotoMemory {
   id: string;
   title: string;
   caption: string;
   dateTag?: string;
-  defaultDescription: string;
-  customImage?: string;
+  defaultDescription?: string;
+  image: string;
 }
 
 export const INITIAL_MEMORIES: PhotoMemory[] = [
@@ -14,6 +19,7 @@ export const INITIAL_MEMORIES: PhotoMemory[] = [
     caption: 'Foto kita di resto berdua pakai baju denim senada. Senyum jahil Alpi yang pose gemas sambil melet manja, dan Prince yang nyengir bahagia banget ada di samping kamu.',
     dateTag: 'Momen Kita Berdua',
     defaultDescription: 'Prince & Alpiyanti senyum ceria dengan baju denim biru kembaran di meja makan resto kayu.',
+    image: denimImg,
   },
   {
     id: 'memory-2',
@@ -21,6 +27,7 @@ export const INITIAL_MEMORIES: PhotoMemory[] = [
     caption: 'Alpi duduk manis di anak tangga menopang dagu sambil senyum lembut natap kamera Prince dengan kacamata kesayangan. Ayu dan manis banget bidadariku.',
     dateTag: 'Tatapan Manis Alpi',
     defaultDescription: 'Alpiyanti duduk di anak tangga menopang dagu dengan senyum manis dan kacamata.',
+    image: topangDaguImg,
   },
   {
     id: 'memory-3',
@@ -28,6 +35,7 @@ export const INITIAL_MEMORIES: PhotoMemory[] = [
     caption: 'Pipi empuk kesayangan yang selalu pengen Prince unyel-unyel kalau lagi kangen. Eyeliner Alpi cantik banget, mukanya pasrah tapi ngegemesin maksimal.',
     dateTag: 'Pipi Paling Empuk',
     defaultDescription: 'Prince mencubit pipi lembut Alpiyanti dengan penuh rasa gemas dan cinta.',
+    image: cubitPipiImg,
   },
   {
     id: 'memory-4',
@@ -35,6 +43,7 @@ export const INITIAL_MEMORIES: PhotoMemory[] = [
     caption: 'Foto close-up wajah cantik Alpiyanti dengan senyum teduh dan tatapan mata yang jernih. Setiap ngeliat foto ini, Prince selalu diingetin betapa cantiknya pacar Prince.',
     dateTag: 'Wajah Paling Ayu',
     defaultDescription: 'Potret close-up wajah cantik Alpiyanti yang tersenyum manis dengan tatapan teduh.',
+    image: tatapanMataImg,
   },
 ];
 
