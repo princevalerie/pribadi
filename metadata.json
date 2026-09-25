@@ -1,0 +1,8 @@
+{
+  "name": "Surat Maaf Dari Prince Untuk Alpiyanti",
+  "description": "Website permintaan maaf tulus dan penuh kasih dari Prince untuk Alpiyanti.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
