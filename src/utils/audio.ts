@@ -8,7 +8,7 @@ class RomanticAudioPlayer {
 
   constructor() {
     if (typeof window !== 'undefined') {
-      const audioUrl = `${import.meta.env.BASE_URL}audio/a-thousand-years.mp3`;
+      const audioUrl = `${import.meta.env.BASE_URL}audio/a-thousand-years.mp3?v=piano`;
       this.audio = new Audio(audioUrl);
       this.audio.preload = 'auto';
       this.audio.loop = true;
