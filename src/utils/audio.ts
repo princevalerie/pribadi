@@ -7,10 +7,10 @@ class RomanticAudioPlayer {
   private onStateChangeCallbacks: Array<(playing: boolean) => void> = [];
 
   constructor() {
-    // Initialize in browser environment
     if (typeof window !== 'undefined') {
       const audioUrl = `${import.meta.env.BASE_URL}audio/a-thousand-years.mp3`;
       this.audio = new Audio(audioUrl);
+      this.audio.preload = 'auto';
       this.audio.loop = true;
       this.audio.volume = 0.65; // Warm, romantic background volume
 
@@ -37,26 +37,26 @@ class RomanticAudioPlayer {
 
   public subscribe(cb: (playing: boolean) => void) {
     this.onStateChangeCallbacks.push(cb);
+    cb(this.isPlaying);
     return () => {
       this.onStateChangeCallbacks = this.onStateChangeCallbacks.filter((c) => c !== cb);
     };
   }
 
-  public start(): boolean {
+  public async start(): Promise<boolean> {
     if (!this.audio) return false;
 
-    const playPromise = this.audio.play();
-    if (playPromise !== undefined) {
-      playPromise
-        .then(() => {
-          this.isPlaying = true;
-          this.notify();
-        })
-        .catch((err) => {
-          console.warn('Autoplay restricted by browser, user interaction required:', err);
-        });
+    try {
+      await this.audio.play();
+      this.isPlaying = true;
+      this.notify();
+      return true;
+    } catch {
+      // Browser autoplay policy prevented playback before user gesture
+      this.isPlaying = false;
+      this.notify();
+      return false;
     }
-    return true;
   }
 
   public stop(): void {

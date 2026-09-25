@@ -13,9 +13,45 @@ export default function App() {
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
 
   useEffect(() => {
-    return romanticPlayer.subscribe((playing) => {
+    const unsub = romanticPlayer.subscribe((playing) => {
       setIsMusicPlaying(playing);
     });
+
+    // 1. Coba langsung nyalakan otomatis saat halaman dibuka
+    romanticPlayer.start();
+
+    // 2. Fallback untuk browser (Chrome/Safari/HP) yang membatasi audio sebelum interaksi pengguna:
+    // Begitu Alpi/pengguna menyentuh layar, scroll, atau mengklik di mana saja, lagu langsung auto nyala!
+    const triggerAutoPlayOnInteraction = () => {
+      if (!romanticPlayer.getIsPlaying()) {
+        romanticPlayer.start().then((success) => {
+          if (success) {
+            removeInteractionListeners();
+          }
+        });
+      } else {
+        removeInteractionListeners();
+      }
+    };
+
+    const removeInteractionListeners = () => {
+      window.removeEventListener('click', triggerAutoPlayOnInteraction);
+      window.removeEventListener('touchstart', triggerAutoPlayOnInteraction);
+      window.removeEventListener('scroll', triggerAutoPlayOnInteraction);
+      window.removeEventListener('pointerdown', triggerAutoPlayOnInteraction);
+      window.removeEventListener('keydown', triggerAutoPlayOnInteraction);
+    };
+
+    window.addEventListener('click', triggerAutoPlayOnInteraction, { passive: true });
+    window.addEventListener('touchstart', triggerAutoPlayOnInteraction, { passive: true });
+    window.addEventListener('scroll', triggerAutoPlayOnInteraction, { passive: true });
+    window.addEventListener('pointerdown', triggerAutoPlayOnInteraction, { passive: true });
+    window.addEventListener('keydown', triggerAutoPlayOnInteraction, { passive: true });
+
+    return () => {
+      unsub();
+      removeInteractionListeners();
+    };
   }, []);
 
   const handleStartExplore = () => {
